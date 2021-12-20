@@ -1,34 +1,54 @@
-let number = 1;
+// Still haven't debugged Chrome Storage. But now working with local storage
 
 document.getElementById("submitbutton").addEventListener("click", taskPutter);
 document.getElementById("resetbutton").addEventListener("click", taskremover);
 
 document.addEventListener("DOMContentLoaded", ()=>{
-  for( let key in localStorage){
-    let text=localStorage.getItem(key);
-    let task = document.createElement("p");
-    task.appendChild(document.createTextNode(number + ". " + text));
-    document.getElementById("rem_task").appendChild(task);
-  }
+  fetchItem();
 })
+
+function fetchItem(){
+  let num=parseInt(localStorage.getItem('number'));
+  console.log(num);
+  for( let key=1;key<=num;key++){
+      let text=localStorage.getItem(key);
+      console.log('Value currently is ' + text);
+      let task = document.createElement("p");
+      task.appendChild(document.createTextNode(key + ". " + text));
+      document.getElementById("rem_task").appendChild(task);
+  }
+}
 function taskPutter() {
   let text = document.getElementById("text").value;
   if (text == "") return;
 
-  let task = document.createElement("p");
-  task.appendChild(document.createTextNode(number + ". " + text));
-  document.getElementById("rem_task").appendChild(task);
-  number += 1;
-  document.getElementById("text").value = "";
+  let num=parseInt(localStorage.getItem('number'));
+  if(num==NaN){
+    num=0;
+  }
+  console.log(num);
+  num += 1;
+  localStorage.setItem('number',num);
 
-  chrome.storage.local.set({ number: text },()=>{
+  let task = document.createElement("p");
+  task.appendChild(document.createTextNode(num + ". " + text));
+  document.getElementById("rem_task").appendChild(task);
+
+  document.getElementById("text").value = "";
+  localStorage.setItem(num,text);
+  chrome.storage.local.set({ num: text },()=>{
       console.log( "Text is stored in Local storage.");
   });
 }
 
 function taskremover() {
+  let num=parseInt(localStorage.getItem('number'));
+  console.log(num);
+
   document.getElementById("rem_task").innerHTML = "";
   chrome.storage.local.clear();
   console.log("To-do list is removed");
-  number = 1;
+
+  num=0;
+  localStorage.setItem('number',num);
 }
