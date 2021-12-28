@@ -1,15 +1,15 @@
 {
-    "name":"New Extensions",
-    "version":"0.0.1",
-    "manifest_version": 2,
-    "browser_action": {
-        "default_popup":"popup.html",
-        "default_icon" :"logo.png"
-    },
-    "icons":{
-        "128":"logo.png"
-    },
-    "description": "Manage your tasks effortlessely using this extensions",
-    "incognito": "split",
-    "permissions":["storage"]
+  "name": "New Extensions",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "logo.png"
+  },
+  "icons": {
+    "128": "logo.png"
+  },
+  "description": "Manage your tasks effortlessely using this extensions",
+  "incognito": "split",
+  "permissions": ["storage"]
 }
