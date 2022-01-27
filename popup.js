@@ -10,7 +10,8 @@ function fetchItem() {
   console.log(num);
   for (let key = 1; key <= num; key++) {
     let text = localStorage.getItem(key);
-    var new_text = text.replace(/.{6}/g, "$0\n");
+    //var new_text = text.replace(/.{6}/g, "$0\n");  This line is producing ambigious nature
+    let new_text= text;
     let task = document.createElement("p");
     task.appendChild(document.createTextNode(key + ". " + new_text));
     document.getElementById("rem_task").appendChild(task);
