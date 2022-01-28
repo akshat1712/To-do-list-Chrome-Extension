@@ -10,10 +10,9 @@ function fetchItem() {
   console.log(num);
   for (let key = 1; key <= num; key++) {
     let text = localStorage.getItem(key);
-    //var new_text = text.replace(/.{6}/g, "$0\n");  This line is producing ambigious nature
-    let new_text= text;
+    text = newlinetext(text);
     let task = document.createElement("p");
-    task.appendChild(document.createTextNode(key + ". " + new_text));
+    task.appendChild(document.createTextNode(key + ". " + text));
     document.getElementById("rem_task").appendChild(task);
   }
 }
@@ -28,7 +27,8 @@ function taskPutter() {
   num += 1;
   localStorage.setItem("number", num);
   let task = document.createElement("p");
-  task.appendChild(document.createTextNode(num + ". " + text));
+  task.innerHTML = newlinetext(num + ". " + text);
+
   document.getElementById("rem_task").appendChild(task);
   document.getElementById("text").value = "";
   localStorage.setItem(num, text);
@@ -39,4 +39,17 @@ function taskremover() {
   document.getElementById("rem_task").innerHTML = "";
   num = 0;
   localStorage.setItem("number", num);
+}
+
+function newlinetext(text) {
+  var count = 0;
+  for (var i = 0; i < text.length; i++) {
+    if (text[i] == " ") count++;
+
+    if (count == 7) {
+      text = text.substring(0, i) + "\n" + text.substring(i, text.length);
+      count = 0;
+    }
+  }
+  return text;
 }
