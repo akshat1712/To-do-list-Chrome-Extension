@@ -11,5 +11,3 @@ Without Tasks  | With Tasks
 
 To use it , just enter a text in textbox and press submit to add it to your task list.  
 Pressing reset will make all tasks disappear.  
-
-P.S- This chrome extension is still under built
